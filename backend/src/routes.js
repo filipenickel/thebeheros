@@ -3,7 +3,10 @@ const routes = express.Router();
 //Importando controller
 const OngController = require('./controllers/OngController')
 const IncidentController = require('./controllers/IncidentController')
+const SessionController = require('./controllers/SessionController')
 
+//Sessao Login
+routes.post('/session',SessionController.create)
 
 //Lisando todas ongs
 routes.get('/ong', OngController.listagem);
