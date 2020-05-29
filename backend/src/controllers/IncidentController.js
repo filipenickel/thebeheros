@@ -2,7 +2,20 @@ const connection = require('../database/conection')
 module.exports = {
     //Listagem de Incidents
     async listagem (request,response){
-        const incidents = await connection('incidents').select('*');
+        //Contador total de incidentes
+        const [count] = await connection('incidents').count()
+        //console.log(count)
+
+
+        //Adicionando listagem por paginas .limit(5) .offset((page - 1) * 5)
+        const {page = 1} = request.query;
+        const incidents = await connection('incidents')
+        .limit(5)
+        .offset((page - 1) * 5)
+        .select('*');
+
+        //Adicionando o valor total de incidentes ao header
+        response.header('X-Total-Count', count['count(*)'])
         return response.json({ incidents })
     },
 
