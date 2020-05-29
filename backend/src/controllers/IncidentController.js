@@ -10,12 +10,14 @@ module.exports = {
         //Adicionando listagem por paginas .limit(5) .offset((page - 1) * 5)
         const {page = 1} = request.query;
         const incidents = await connection('incidents')
+        .join('ongs','ong_id', '=', 'incidents.ong_id')
         .limit(5)
         .offset((page - 1) * 5)
-        .select('*');
+        .select(['incidents.*','ongs.name','ongs.email','ongs.whatsapp','ongs.city','ongs.uf']);
 
         //Adicionando o valor total de incidentes ao header
         response.header('X-Total-Count', count['count(*)'])
+
         return response.json({ incidents })
     },
 
