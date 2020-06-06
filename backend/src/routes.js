@@ -1,9 +1,11 @@
 const express = require('express');
+
 const routes = express.Router();
 //Importando controller
 const OngController = require('./controllers/OngController')
 const IncidentController = require('./controllers/IncidentController')
 const SessionController = require('./controllers/SessionController')
+const ProfileController = require('./controllers/ProfileController')
 
 //Sessao Login
 routes.post('/session',SessionController.create)
@@ -12,6 +14,10 @@ routes.post('/session',SessionController.create)
 routes.get('/ong', OngController.listagem);
 //Criando Ongs
 routes.post('/ong', OngController.create);
+
+//Listando incidents criados pela ong logada
+routes.get('/profile',ProfileController.listagem);
+
 
 //Listando Incidente
 routes.get('/incidents',IncidentController.listagem);
