@@ -59,7 +59,9 @@ export default function NewIncidents(){
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
-                <textarea  
+                <textarea 
+                rows="3"
+                role='3'
                     placeholder="Descrição"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
